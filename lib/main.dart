@@ -30,40 +30,71 @@ class DicePage extends StatefulWidget {
 class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
+  int totalScore ;
+
 
   void changeDiceFace() {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1;
       rightDiceNumber = Random().nextInt(6) + 1;
+      totalScore = leftDiceNumber+rightDiceNumber;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              child: Image.asset(
-                'images/Dice$leftDiceNumber.png',
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: FlatButton(
+                  child: Image.asset(
+                    'images/Dice$leftDiceNumber.png',
+                  ),
+                  onPressed: () {
+                    changeDiceFace();
+                  },
+                ),
               ),
-              onPressed: () {
-                changeDiceFace();
-              },
+              //Get students to create the second die as a challenge
+              Expanded(
+                child: FlatButton(
+                  child: Image.asset(
+                    'images/Dice$rightDiceNumber.png',
+                  ),
+                  onPressed: () {
+                    changeDiceFace();
+                  },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20.0,
+            width: 150.0,
+            child: Divider(
+              color: Colors.teal.shade100,
             ),
           ),
-          //Get students to create the second die as a challenge
-          Expanded(
-            child: FlatButton(
-              child: Image.asset(
-                'images/Dice$rightDiceNumber.png',
-              ),
-              onPressed: () {
-                changeDiceFace();
-              },
-            ),
-          ),
+          Card(
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                leading: Icon(
+                  Icons.score,
+                  color: Colors.green,
+                ),
+                title: Text(
+                  'Dicee Score : $totalScore',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 20.0,
+                  ),
+                ),
+              )),
         ],
       ),
     );
