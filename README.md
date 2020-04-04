@@ -1,6 +1,6 @@
 # dicescoreapp
 
-A new Flutter project.
+A new Flutter project for rolling dice and calculating score. #FlutterBeginner 
 
 ## Getting Started
 
